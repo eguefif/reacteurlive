@@ -1,6 +1,13 @@
-def main():
-    print("Hello from reacteurlive!")
+from fastapi import FastAPI
+
+app = FastAPI()
 
 
-if __name__ == "__main__":
-    main()
+def get_data():
+    return []
+
+
+@app.get("/data")
+async def root() -> list[PlantState]:
+    data = get_data()
+    return data
