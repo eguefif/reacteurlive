@@ -1,4 +1,4 @@
-# from datetime import datetime
+from datetime import datetime
 
 from sqlmodel import Field, SQLModel
 
@@ -8,11 +8,11 @@ class PlantState(SQLModel, table=True):
     name: str
     status: str
     sector: str
-    # start_date: datetime
-    # end_date: datetime
+    start_date: datetime
+    end_date: datetime
     stop_type: str
     stop_reason: str
     information: str
     power_max: str | None
     power_available: str | None
-    # published_at: datetime
+    published_at: datetime
