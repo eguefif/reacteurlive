@@ -19,12 +19,11 @@ $ uvr ingest.py
 ## TODO
 
 ### Backend
-- [ ] Create a Plant table with information and coordinate: use both the Plant dataset + and City dataset + PlantState.
-- [ ] Refactor plant state to only have a association with Plant
-- [ ] Ingest CSV into a sqlite database
+- [ ] Add status information to plant using the CSV that contains stopped plant.
+- [ ] Add a pictures
 
 ### Frontend
 
-- [ ] Several reactor are in the same spot. We need to gather by location
 - [ ] Display plant information in a Vue component instead of popup: find picture
+    - [ ] Add picture
 - [ ] Display global information: power max

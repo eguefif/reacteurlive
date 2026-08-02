@@ -20,5 +20,4 @@ export interface Reactor {
   reactors: Reactor[]
   commissioningDate: string
   powerMW: number
-  minPowerMW: number
 }

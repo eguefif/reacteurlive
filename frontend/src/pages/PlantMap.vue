@@ -48,6 +48,7 @@
   .wrapper{
     display: flex;
     justify-content: space-between;
+    gap: 32px;
   }
 
   .info {

@@ -1,6 +1,7 @@
 <template>
-  <div class="wrapper">
-    <div>Global info</div>
+  <div class="flex flex-col gap-[32px] m-[16px]">
+    <div class="h-[124px] p-16 text-2xl">Global info</div>
+    <div class="divider w-[324px] mx-auto"></div>
     <PlantInfo :plant="plant" />
   </div>
 </template>
