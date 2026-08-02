@@ -9,14 +9,17 @@
   let map: L.Map | null = null;
 
   const props = defineProps<{
-    plants: Plant[]
+    plants: Map<string, Plant>
   }>();
 
   const selectedPlant = defineModel<Plant> ();
 
-  function addMarkers(plantList: Plant[]) {
+  function addMarkers(plantList: Map<string, Plant>) {
     if (!map) return;
-    plantList.forEach((plant: Plant) => {
+    plantList.forEach((value: Plant, _key: string, _plants: Map<string, Plant>) => {
+
+      const plant: Plant = value;
+      if (!plant) return;
       const coordinate: number[] = plant.gps
       .split(',')
       .map((entry: string) => entry.trim())
@@ -24,7 +27,7 @@
 
       L.marker(coordinate as [number, number])
       .bindPopup(plant.name)
-      .on('click', (_e: LeafletMouseEvent) => selectedPlant.value = plant)
+      .on('click', (_e: LeafletMouseEvent) => selectedPlant.value = value)
       .addTo(map as L.Map);
     });
   }

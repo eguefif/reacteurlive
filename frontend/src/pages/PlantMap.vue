@@ -1,21 +1,34 @@
 <script setup lang="ts">
-  import Map from '@components/map/Map.vue'
+  import MapFr from '@components/map/Map.vue'
   import Info from '@components/info/Info.vue'
   import { onMounted, ref } from 'vue';
   import axios from 'axios';
-  import { type Plant } from "./plant";
+  import { type Plant, type Reactor } from "./plant";
 
   const loading = ref<boolean>(true);
-  const plants = ref([] as Plant[]);
+  const plants = ref<Map<string, Plant>>(new Map());
   const plant = ref<Plant | undefined>(undefined);
 
   onMounted(async () => {
     loading.value = true;
-    const response = await axios.get<Plant[]>('/plants');
+    const response = await axios.get<Reactor[]>('/plants');
     loading.value = false;
 
-    plants.value = response.data;
-    plants.value.forEach((plant: Plant) => console.log(plant.gps))
+    response.data.forEach((reactor: Reactor) => {
+      const plant: Plant = plants.value.get(reactor.name) || {
+          name: reactor.name,
+          sector: reactor.sector,
+          subSector: reactor.sector,
+          gps: reactor.gps,
+          city: reactor.city,
+          departement: reactor.departement,
+          region: reactor.region,
+          reactors: [],
+      };
+      plant.reactors.push(reactor);
+      plants.value.set(reactor.name, plant)
+    });
+    console.log(plants.value);
   });
 </script>
 
@@ -26,7 +39,7 @@
       <Info :plant="plant" />
     </div>
     <div class="map">
-      <Map :plants="plants" v-model="plant" class="map"/>
+      <MapFr :plants="plants" v-model="plant" class="map"/>
     </div>
   </div>
 </template>
