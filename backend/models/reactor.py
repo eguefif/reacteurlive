@@ -24,5 +24,4 @@ class Reactor(SQLModel, table=True):
     stop_type: str | None
     stop_reason: str | None
     information: str | None
-    power_max: str | None
     power_available: str | None

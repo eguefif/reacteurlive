@@ -12,7 +12,13 @@
           <div> {{ plant.reactors.length }} réacteurs {{ plant.sector}}</div>
           <div> Puissance totale de {{ totalPower }} mégawatt</div>
           <div v-for="(reactor, index) in plant.reactors">
-            <div>Réacteur {{ index + 1}} : {{reactor.powerMW }} mégawatt</div>
+            <div>Réacteur {{ index + 1}} {{ reactor.sub_sector }}</div>
+            <div v-if="reactor.status">
+              <div>{{reactor.status }}</div>
+              <div>Arrêt {{reactor.stop_type }}</div>
+              <div>{{ getReason(reactor.stop_reason, reactor.information) }}</div>
+              <div>Puissance disponible: {{reactor.power_available }} mégawatt</div>
+            </div>
           </div>
         </div>
       </div>
@@ -23,16 +29,14 @@
 <script setup lang="ts">
     import {computed } from 'vue';
     import { type Plant } from "@pages/plant";
-    import { type reactorState } from "@components/info/reactorState";
 
     const props = defineProps<{
       plant?: Plant
     }>();
 
-    const response = await axios.get<ReactorState[]>(`/reactor/states/${props.plant.id}`)
-
     const totalPower = computed(() => {
       if (!props.plant) return 0;
+      console.log(props.plant)
       const result = props.plant.reactors.reduce((acc, value) => acc + value.powerMW
       , 0);
       return result;
@@ -49,6 +53,14 @@
 
       return "/images/" + props.plant.name.toLowerCase() + ".png"
     })
+
+    function getReason(reason:string, information: string) {
+      if (reason === "Informations complémentaires") {
+        return information.split("-------------------------------------")[1]
+      } else {
+      return reason;
+      }
+    }
 </script>
 
 <style scoped>

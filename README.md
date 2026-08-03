@@ -37,6 +37,9 @@ $ uvr ingest.py
 - [ ] Display plant information in a Vue component instead of popup: find picture
     - [ ] Add picture
 - [ ] Display global information: power max
+- [ ] Move plant card on the opposite side
+- [ ] Find a way to camel case Axios return
+- [ ] Improve plant card
 
 
 ## DB Architecture

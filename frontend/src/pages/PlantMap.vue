@@ -28,7 +28,6 @@
       plant.reactors.push(reactor);
       plants.value.set(reactor.name, plant)
     });
-    console.log(plants.value);
   });
 </script>
 

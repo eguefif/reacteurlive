@@ -21,4 +21,11 @@ export interface Reactor {
   reactors: Reactor[]
   commissioningDate: string
   powerMW: number
+  status?: string
+  startDate?: string
+  endDate?: string
+  stopType?: string
+  stopReason?: string
+  information?: string
+  powerAvailable?: string
 }

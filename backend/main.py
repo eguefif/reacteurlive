@@ -6,7 +6,6 @@ from sqlmodel import select
 
 from db import SessionDep
 from models.reactor import Reactor
-from models.reactor_state import ReactorState
 
 app = FastAPI()
 
@@ -19,16 +18,3 @@ async def plants(session: SessionDep) -> list[Reactor]:
     reactors = session.exec(statement).all()
 
     return list(reactors)
-
-
-@app.get("/reactor/{reactor_id}")
-async def reactor_state(session: SessionDep, reactor_id: int) -> ReactorState | None:
-    statement = (
-        select(ReactorState)
-        .where(ReactorState.reactor_id == reactor_id)
-        .where(ReactorState.start_date < datetime.now())
-        .where(ReactorState.end_date > datetime.now())
-    )
-    reactor = session.exec(statement).first()
-
-    return reactor
