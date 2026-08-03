@@ -7,7 +7,7 @@ engine = create_engine("sqlite:///database.db")
 
 
 def db_init():
-    import models.plant_state
+    import models.reactor_state
 
     SQLModel.metadata.drop_all(engine)
     SQLModel.metadata.create_all(engine)

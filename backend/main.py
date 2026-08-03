@@ -3,7 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlmodel import select
 
 from db import SessionDep
-from models.plant import Plant
+from models.reactor import Plant
 
 app = FastAPI()
 
