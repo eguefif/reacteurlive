@@ -10,6 +10,7 @@ export interface Plant {
 }
 
 export interface Reactor {
+  id: number
   name: string
   sector: string
   subSector: string

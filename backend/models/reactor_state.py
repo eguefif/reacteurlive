@@ -16,4 +16,4 @@ class ReactorState(SQLModel, table=True):
     power_available: str | None
     published_at: datetime
 
-    plant_id: int | None = Field(default=None, foreign_key="plant.id")
+    reactor_id: int | None = Field(default=None, foreign_key="reactor.id")

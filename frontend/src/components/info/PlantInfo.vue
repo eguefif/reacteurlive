@@ -23,9 +23,13 @@
 <script setup lang="ts">
     import {computed } from 'vue';
     import { type Plant } from "@pages/plant";
+    import { type reactorState } from "@components/info/reactorState";
+
     const props = defineProps<{
       plant?: Plant
     }>();
+
+    const response = await axios.get<ReactorState[]>(`/reactor/states/${props.plant.id}`)
 
     const totalPower = computed(() => {
       if (!props.plant) return 0;
